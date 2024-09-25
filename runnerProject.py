@@ -1,19 +1,43 @@
 import streamlit as st
 import google.generativeai as genai
 from random import randint
+#import vertexai
+#from vertexai.preview.generative_models import GenerativeModel, Image
 
 genai.configure(api_key="AIzaSyBgsUCq61-50kMRGCFL3JorK1vYUzTPQfs")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
+#PROJECT_ID = "gen-lang-client-0643452862"
+#REGION = "us-central1"
+#vertexai.init(project=PROJECT_ID, location=REGION)
+#model0 = GenerativeModel("gemini-1.5-flash-preview-0514")
 
 def generate_response(s):
-    print("User:",s)
+    print("User:", s)
     response = model.generate_content(s)
-    text = str(response.text).replace("```","```\n").replace('* **', '- **')
+    
+    # Initialize text response
+    text = "Мен бұған сенімді емеспін. Толығырақ түсіндіре аласыз ба? Немесе басқаша сұрасаңыз."
+    
+    try:
+        # Attempt to access the 'text' attribute
+        if hasattr(response, 'text'):
+            text = str(response.text).replace("```", "```\n").replace('* **', '- **').strip()
 
-    if hasattr(response, 'candidates') and response.candidates:
-        finish_reason = response.candidates[0].finish_reason
-        print(f"Finish reason: {finish_reason}")
+        # Access candidates safely
+        if hasattr(response, 'candidates') and response.candidates:
+            candidate = response.candidates[0]
+
+            # Try accessing finish_reason and handle any potential errors
+            try:
+                finish_reason = candidate.finish_reason
+                print(f"Finish reason: {finish_reason}")
+            except AttributeError:
+                print("Finish reason not available in the candidate.")
+                
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        response = model0.generate_content(s)
 
     return add_Yergali(text)
 
