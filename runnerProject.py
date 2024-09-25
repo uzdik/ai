@@ -50,6 +50,6 @@ question  = st.text_input("Сұрағыңызды осында жазсаңыз:
 
 if question:
     response_text = generate_response(question)
-    print(response_text)
+    print(f"User: {question}\nGenAI: {response_text}\{'*'*10}")
     st.header("Біздің жауапты қабыл алыңыз:")
     st.write(response_text)
