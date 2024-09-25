@@ -37,6 +37,7 @@ st.set_page_config(layout="wide")
 
 # Hide Streamlit's header and 'Manage App' button
 hide_streamlit_style = """
+<<<<<<< HEAD
     <style>
     /* Hide the hamburger menu */
     #MainMenu {visibility: hidden;}
@@ -53,6 +54,14 @@ hide_streamlit_style = """
     </style>
 """
 
+=======
+<style>
+#MainMenu {visibility: hidden;}  /* Hide 'Manage App' button */
+footer {visibility: hidden;}     /* Hide the Streamlit footer */
+header {visibility: hidden;}     /* Hide the Streamlit header */
+</style>
+"""
+>>>>>>> 6559157dcad3c0c5186b5ceeb052443e88b808d0
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
