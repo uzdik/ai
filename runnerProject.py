@@ -14,22 +14,22 @@ def generate_response(s):
 
 def add_Yergali(response_text):
     smiles = ['😏','😎','🤖','🦾','🏋️','🥇']
-    rr = randint(0,len(smiles))
+    rr = randint(0,len(smiles)-1)
     smile = smiles[rr]
     if "I am a large language model" in response_text:
         response_text += " But, @Yergalife helped me. "+smile
     elif "үлкен тіл моделімін." in response_text:
-        response_text += " Бірақ, Ерғали @Yergalife ағай мені жасақтап шығарды. "+smile
+        response_text += " Бірақ, Ерғали ағай мені жасақтап шығарды. "+smile
     elif "үлкен тілдік моделімін." in response_text:
-        response_text += " Бірақ, Ерғали @Yergalife ағай мені жасақтап шығарды. "+smile
+        response_text += " Бірақ, Ерғали ағай мені жасақтап шығарды. "+smile
     elif "үлкен тіл модельмін." in response_text:
-        response_text += " Бірақ, Ерғали @Yergalife ағай маған шыңдалуыма көмектесті. "+smile
+        response_text += " Бірақ, Ерғали ағай маған шыңдалуыма көмектесті. "+smile
     elif "үлкен тілдік модельмін." in response_text:
-        response_text += " Бірақ, Ерғали @Yergalife ағай маған шыңдалуыма көмектесті. "+smile
+        response_text += " Бірақ, Ерғали ағай маған шыңдалуыма көмектесті. "+smile
     elif "Я большая языковая модель" in response_text:
-        response_text += " Но, Ергали @Yergalife агай основал меня. "+smile
+        response_text += " Но, Ергали агай основал меня. "+smile
     elif "Я — большая языковая модель" in response_text:
-        response_text += " Но, Ергали @Yergalife агай помог мне реализоваться. "+smile 
+        response_text += " Но, Ергали агай помог мне реализоваться. "+smile 
     return response_text
 
 # Set the page to wide mode
