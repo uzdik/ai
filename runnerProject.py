@@ -7,9 +7,14 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 
 def generate_response(s):
-    print(s)
+    print("User:",s)
     response = model.generate_content(s)
-    text = str(response.text).replace("```","```\n").replace('* **', '- **').strip()
+    text = str(response.text).replace("```","```\n").replace('* **', '- **')
+
+    if hasattr(response, 'candidates') and response.candidates:
+        finish_reason = response.candidates[0].finish_reason
+        print(f"Finish reason: {finish_reason}")
+
     return add_Yergali(text)
 
 def add_Yergali(response_text):
@@ -50,6 +55,6 @@ question  = st.text_input("Сұрағыңызды осында жазсаңыз:
 
 if question:
     response_text = generate_response(question)
-    print(f"User: {question}\nGenAI: {response_text}\{'*'*10}")
+    print(f"GenAI: {response_text}\n{'*'*20}")
     st.header("Біздің жауапты қабыл алыңыз:")
     st.write(response_text)
