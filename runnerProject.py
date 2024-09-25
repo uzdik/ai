@@ -32,6 +32,18 @@ def add_Yergali(response_text):
         response_text += " Но, Ергали @Yergalife агай помог мне реализоваться. "+smile 
     return response_text
 
+# Set the page to wide mode
+st.set_page_config(layout="wide")
+
+# Hide Streamlit's header and 'Manage App' button
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}  /* Hide 'Manage App' button */
+footer {visibility: hidden;}     /* Hide the Streamlit footer */
+header {visibility: hidden;}     /* Hide the Streamlit header */
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
 st.title("Үздік Білім GenAI")
