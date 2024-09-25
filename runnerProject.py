@@ -35,24 +35,13 @@ def add_Yergali(response_text):
 # Set the page to wide mode
 st.set_page_config(layout="wide")
 
-# Hide Streamlit's header and 'Manage App' button
 hide_streamlit_style = """
-    <style>
-    /* Hide the hamburger menu */
-    #MainMenu {visibility: hidden;}
-    
-    /* Hide the Streamlit header */
-    header {visibility: hidden;}
-    
-    /* Hide the Streamlit footer */
-    footer {visibility: hidden;}
-
-    /* Hide specific app elements that might have changed */
-    .css-1cm3hpy {visibility: hidden;}  /* Targets specific container for 'Manage App' */
-    .css-18ni7ap {visibility: hidden;}  /* Another potential class for buttons */
-    </style>
+<style>
+#MainMenu {visibility: hidden;}  
+footer {visibility: hidden;}   
+header {visibility: hidden;}   
+</style>
 """
-
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
