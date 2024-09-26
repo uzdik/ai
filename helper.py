@@ -1,14 +1,19 @@
-import streamlit as st
 import google.generativeai as genai
 from random import randint
-import re
+import re, os
 
-genai.configure(api_key="AIzaSyBgsUCq61-50kMRGCFL3JorK1vYUzTPQfs")
+api_key = os.getenv("GENAI_API_KEY")
+
+if api_key:
+    genai.configure(api_key=api_key)
+else:
+    raise ValueError("API key not found. Please set the GENAI_API_KEY environment variable.")
+
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 with open("additional.txt") as f:
     reader = f.read()
-    
+
 starter = "Can you response only in Kazakh language, for this request, please: "
 
 def check(sentences):
@@ -36,19 +41,19 @@ def check(sentences):
         soz = texts[randint(0,len(texts)-1)]
         return soz+smile
     return ''
-    
+
 def generate_response(s):
     print("User:", s)
     ss = s.lower()
     for t in ["yergali","ergali",'ерғали','ергали']:
-    	if t in ss:
-    		s+=reader
-    		break
+        if t in ss:
+            s += reader
+            break
 
-    response = model.generate_content(starter+s)
+    response = model.generate_content(starter + s)
 
     text = "Мен бұған сенімді емеспін. Толығырақ түсіндіре аласыз ба? Немесе басқаша сұрасаңыз."
-    
+
     try:
         if hasattr(response, 'text'):
             text = str(response.text).replace("```", "```\n").replace('* **', '- **').strip()
@@ -64,25 +69,7 @@ def generate_response(s):
                 
     except Exception as e:
         print(f"An error occurred: {e}")
-    text+=check(text)
+
+    text += check(text)
     return text
 
-st.set_page_config(layout="wide")
-
-hide_streamlit_style = """
-<style>
-#MainMenu {visibility: hidden;}  
-footer {visibility: hidden;}   
-header {visibility: hidden;}   
-</style>
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-
-st.title("Үздік Білім GenAI")
-question  = st.text_input("Сұрағыңызды осында жазсаңыз:")
-
-if question:
-    response_text = generate_response(question)
-    print(f"GenAI: {response_text}\n{'*'*20}")
-    st.write(response_text)
